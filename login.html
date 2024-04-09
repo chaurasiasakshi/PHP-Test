@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#login-form').submit(function(e) {
+            e.preventDefault(); // Prevent the form from submitting traditionally
+
+            // Get the form data
+            var formData = $(this).serialize();
+
+            // Send an AJAX request to the server
+            $.ajax({
+                type: 'POST',
+                url: 'login.php',
+                data: formData,
+                success: function(response) {
+                    // Display response from server
+                    $('#response').html(response);
+                }
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+    <div id="response"></div>
+    <form id="login-form" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
